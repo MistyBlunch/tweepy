@@ -19,15 +19,13 @@ auth.set_access_token("2786904242-jNGhsITOkfTNbaghYREM9obiq3OBYwB5WWwmOqc",
   "mTQZwY5OohwcY5Uj9QOuS7E6hBKO4Zafl7I6f18HmcO2X")
 
 # Create API object
-api = tweepy.API(auth, wait_on_rate_limit=True,
-      wait_on_rate_limit=True)
+api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
 tweets_listener = MyStreamListener(api)
 stream = tweepy.Stream(api.auth, tweets_listener)
 stream.filter(track=["Python", "Django", "Tweepy"], languages=["en"])
 
 tweets = api.mentions_timeline()
-
 for tweet in tweets:
   tweet.favorite()
   tweet.user.follow()
